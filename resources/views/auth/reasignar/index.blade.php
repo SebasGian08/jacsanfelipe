@@ -1,7 +1,7 @@
 @extends('auth.index')
 
 @section('titulo')
-    <title>JAC | Registro de Asistencia</title>
+    <title>JAC </title>
 @endsection
 
 @section('styles')
@@ -24,14 +24,10 @@
 
         <section class="content-header">
             <h1>
-                <i class="fas fa-user-check"></i> Asistencia
+                <i class="fas fa-user-check"></i> Reasignar Asistentes a Nueva Célula
             </h1>
         </section>
-
-
         <br>
-
-        {{--  --}}
         <div class="content-header">
             <div class="row align-items-center">
                 <!-- Contenedor para los mensajes -->
@@ -63,33 +59,54 @@
                 </div>
             </div>
             <div class="form-row">
-                <form class="col-lg-12 col-md-12" action="{{ route('auth.asistencia.store') }}" method="post">
+                <form class="col-lg-12 col-md-12" action="{{ route('auth.reasignar.store') }}" method="POST">
                     @csrf
-                    <input type="hidden" name="id_user" class="id_user" value="{{ $userId }}" required>
-                    <div style="display: flex; flex-wrap: wrap;">
-                        <!-- Programa -->
-                        <div class="form-group col-lg-6">
-                            <label for="tipoprograma" class="m-0 label-primary" style="font-size: 17px;">
-                                <i class="fa fa-briefcase"></i> Programa
-                            </label>
-                            <select class="form-control form-control-lg" id="programa_id" name="programa_id" required>
-                                <option value="" disabled selected>Seleccione Programa..</option>
-                                @foreach ($tipoprograma as $tipoprograma)
-                                    <option value="{{ $tipoprograma->id }}">{{ $tipoprograma->nombre }}</option>
-                                @endforeach
-                            </select>
+                    
+                        <div style="display: flex; flex-wrap: wrap;">
+
+                            <!-- Casillas de verificación para seleccionar asistentes -->
+                            <div class="form-group col-lg-12">
+                                <label for="asistente_id" class="font-weight-bold">Seleccionar Asistentes:</label>
+                                <div class="row">
+                                    @foreach ($asistentes as $asistente)
+                                        <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" name="asistente_id[]"
+                                                    value="{{ $asistente->id }}" id="asistente_{{ $asistente->id }}">
+                                                <label class="custom-control-label" for="asistente_{{ $asistente->id }}">
+                                                    {{ $asistente->nombre }} <span style="color:blueviolet"> (Célula: {{ $asistente->celula->nombre }})</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            <!-- Selección de la Nueva Célula -->
+                            <div class="form-group col-lg-12">
+                                <label for="tipo_programa" class="font-weight-bold" >Seleccionar nueva celula:</label>
+                                <select name="celula_id" id="ncelula_id" required class="form-control">
+                                    @foreach ($celulas as $celula)
+                                        <option value="{{ $celula->id }}">{{ $celula->nombre }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
                         </div>
 
+                        <!-- Botón de Confirmación -->
+                        <div class="form-group col-lg-12 text-center">
+                            <button type="submit" class="btn btn-success btn-lg"
+                                style="font-size: 17px; border-radius: 15px;">
+                                <i class="fa fa-save"></i> Confirmar Reasignación
+                            </button>
+                        </div>
 
-                    </div>
-
-                    <div class="form-group col-lg-12">
-                        <button type="submit" class="btn btn-primary btn-lg" style="font-size: 17px;border-radius:15px;">
-                            <i class="fa fa-save"></i> Confirmar Reasignación</button>
-                    </div>
-                    
+                   
                 </form>
             </div>
+
+
         </div>
     </div>
 @endsection

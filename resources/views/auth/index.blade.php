@@ -237,10 +237,12 @@
                                         </a>
                                     </li>
                             </li>
+                            @if (Auth::guard('web')->user()->profile_id == \BolsaTrabajo\App::$PERFIL_DESARROLLADOR)
                             <li class="nav-item"><a class="nav-link"
-                                    href="{{ route('auth.calendario.listado') }}"><i class="fa fa-save mr-5"></i>
+                                    href="{{ route('auth.reasignar') }}"><i class="fa fa-save mr-5"></i>
                                     Reasignar Asistente</a>
                             </li>
+                            @endif
                     </ul>
 
                     {{-- <li class="nav-item {{ Route::currentRouteName() == 'auth.celula' ? 'active' : '' }}">

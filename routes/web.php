@@ -305,7 +305,7 @@ Route::group(['prefix' => 'auth', 'middleware' => 'auth:web'], function () {
 
 
     /* IACYM JAC */
-    /* GESTIÓN DE CELULAS */
+    /* GESTI锟�0锟�7N DE CELULAS */
     Route::group(['prefix' => 'celula'], function () {
         Route::get('/', 'Auth\CelulaController@index')->name('auth.celula');
         Route::get('/list_all', 'Auth\CelulaController@list_all')->name('auth.celula.list_all');
@@ -379,19 +379,24 @@ Route::group(['prefix' => 'auth', 'middleware' => 'auth:web'], function () {
         Route::get('lista-usuarios', 'Auth\CaminodelhijoController@getUsers')->name('auth.listaUsuarios');
     });
 
+    Route::group(['prefix' => 'reasignar'], function () {
+        Route::get('', 'Auth\ReasignarController@index')->name('auth.reasignar');
+        Route::post('/store', 'Auth\ReasignarController@store')->name('auth.reasignar.store');
+    });
+
 });
 
 // Ruta para almacenar un nuevo asistente para el aniversario JAC
 Route::get('/aniversario', 'App\AniversarioController@index')->name('app.aniversario.index');
 Route::post('/aniversario/store', 'App\AniversarioController@store')->name('aniversario.store');
-//Página principal registrar opiniones
+//P锟斤拷gina principal registrar opiniones
 Route::post('/home/store', 'App\HomeController@store')->name('home.store');
 
 
 Route::group(['prefix' => 'auth'], function () {
     Route::get('/', 'Auth\LoginController@showLoginForm');
     Route::get('login', 'Auth\LoginController@showLoginForm')->name('auth.login');
-    Route::post('login', 'Auth\LoginController@login')->name('auth.login.store'); // Ruta para el inicio de sesión
+    Route::post('login', 'Auth\LoginController@login')->name('auth.login.store'); // Ruta para el inicio de sesi锟斤拷n
     Route::post('login', 'Auth\LoginController@login')->name('auth.login.post');
     Route::post('logout', 'Auth\LoginController@logout')->name('auth.logout');
 
