@@ -61,9 +61,7 @@
             <div class="form-row">
                 <form class="col-lg-12 col-md-12" action="{{ route('auth.reasignar.store') }}" method="POST">
                     @csrf
-                    
                         <div style="display: flex; flex-wrap: wrap;">
-
                             <!-- Casillas de verificación para seleccionar asistentes -->
                             <div class="form-group col-lg-12">
                                 <label for="asistente_id" class="font-weight-bold">Seleccionar Asistentes:</label>
@@ -91,9 +89,7 @@
                                     @endforeach
                                 </select>
                             </div>
-
                         </div>
-
                         <!-- Botón de Confirmación -->
                         <div class="form-group col-lg-12 text-center">
                             <button type="submit" class="btn btn-success btn-lg"
@@ -101,12 +97,8 @@
                                 <i class="fa fa-save"></i> Confirmar Reasignación
                             </button>
                         </div>
-
-                   
                 </form>
             </div>
-
-
         </div>
     </div>
 @endsection
