@@ -26,8 +26,9 @@ class ReasignarController extends Controller
     {
         $celulas = Celula::where('estado', 1) // Solo estado 1
                  ->whereNull('deleted_at') // Excluir registros eliminados
+                 ->orderBy('nombre', 'asc')
                  ->get();
-        $asistentes = Asistentes::orderBy('nombre', 'asc')->get();
+        $asistentes = Asistentes::orderBy('nombre', 'asc')->get()->groupBy('celula_id');
         $User = Auth::guard('web')->user();
         $userId = $User->id; // Extraer el ID del usuario         
         return view('auth.reasignar.index', compact('celulas','asistentes','userId'));
@@ -56,6 +57,7 @@ class ReasignarController extends Controller
                 'asistente_id' => $asistente->id,
                 'celula_id' => $nuevaCelula->id, // Nueva célula
                 'fecha_inicio' => now(), // Fecha del cambio
+                'accion' => 'Reasignacion de forma masiva'
             ]);
 
             // Actualizar el asistente con la nueva célula

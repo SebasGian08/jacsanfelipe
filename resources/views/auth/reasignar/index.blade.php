@@ -66,20 +66,27 @@
                             <div class="form-group col-lg-12">
                                 <label for="asistente_id" class="font-weight-bold">Seleccionar Asistentes:</label>
                                 <div class="row">
-                                    @foreach ($asistentes as $asistente)
-                                        <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" name="asistente_id[]"
-                                                    value="{{ $asistente->id }}" id="asistente_{{ $asistente->id }}">
-                                                <label class="custom-control-label" for="asistente_{{ $asistente->id }}">
-                                                    {{ $asistente->nombre }} <span style="color:blueviolet"> (Célula: {{ $asistente->celula->nombre }})</span>
-                                                </label>
+                                    @foreach ($asistentes as $celula_id => $asistentesGrupo)
+                                        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                                            <h5>Célula: {{ $asistentesGrupo->first()->celula->nombre }}</h5>
+                                            <div class="list-group">
+                                                @foreach ($asistentesGrupo as $asistente)
+                                                    <div class="list-group-item">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" name="asistente_id[]"
+                                                                   value="{{ $asistente->id }}" id="asistente_{{ $asistente->id }}">
+                                                            <label class="custom-control-label" for="asistente_{{ $asistente->id }}">
+                                                                {{ $asistente->nombre }}
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
                                             </div>
                                         </div>
                                     @endforeach
                                 </div>
                             </div>
-
+                  
                             <!-- Selección de la Nueva Célula -->
                             <div class="form-group col-lg-12">
                                 <label for="tipo_programa" class="font-weight-bold" >Seleccionar nueva celula:</label>

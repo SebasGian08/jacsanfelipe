@@ -22,25 +22,24 @@
     <style>
         /* CAMBIAR THEME DE SISTEMA */
         header {
-            background-color: white !important;
-            background-color: #ffffff !important;
+             /*background-color: white !important; 
+             background-color: #273746 !important;
         }
 
-        .content-wrapper:before {
+        /*.content-wrapper:before {
             background: radial-gradient(circle, rgba(0, 114, 191, 1) 37%, rgba(0, 195, 244, 1) 100%);
         }
 
         .main-nav {
-            background: radial-gradient(circle, rgba(0, 114, 191, 1) 37%, rgba(0, 195, 244, 1) 100%);
-        }
-
-        /*.active-item-here {
+            background: radial-gradient(circle, rgba(0, 114, 191, 1) 37%, rgba(0, 195, 244, 1) 100%);*/
+        
+        .active-item-here {
             color: #34495e;
         }
 
         .table thead {
             background-color: #34495e;
-        }*/
+        }
 
         .btn-secondary {
             color: #fff;
@@ -65,11 +64,12 @@
         }
 
         .modal.modal-fill .modal-dialog .modal-header {
-            background-color: #ffffff !important;
+            background-color: #34495e;
         }
 
         .modal.modal-fill {
-            background: rgba(135, 189, 236, 0.305) !important;
+            background: rgba(135, 189, 236, 0.305);
+            !important;
         }
 
         header {
@@ -86,24 +86,20 @@
         .li_notifi:hover {
             background: rgb(231, 229, 229) !important;
         }
-
         .logo img {
-            max-width: 100%;
-            /* Ajusta para no salirse del contenedor */
-            height: auto;
-            /* Mantiene la proporción */
+            max-width: 100%; /* Ajusta para no salirse del contenedor */
+            height: auto;    /* Mantiene la proporción */
         }
 
         @media (max-width: 767px) {
             .logo img {
-                width: 90px !important;
+                width:90px !important;
             }
         }
 
         @media (min-width: 768px) {
             .logo img {
-                max-width: 50%;
-                /* Ajusta el tamaño para pantallas más grandes */
+                max-width: 50%; /* Ajusta el tamaño para pantallas más grandes */
             }
         }
 
@@ -121,11 +117,11 @@
 
         <header class="main-header">
             <div class="inside-header">
-                {{-- <a href="{{ route('auth.inicio') }}" class="logo">
+                <a href="{{ route('auth.inicio') }}" class="logo">
                     <span class="logo-m">
                         <img src="{{ asset('app/img/logojac.png') }}" alt="logo" class="light-logo">
                     </span>
-                </a> --}}
+                </a>
                 <nav class="navbar navbar-static-top">
                     <a href="#" class="sidebar-toggle d-block d-lg-none" data-toggle="push-menu" role="button"
                         style="color: #ffffff;">

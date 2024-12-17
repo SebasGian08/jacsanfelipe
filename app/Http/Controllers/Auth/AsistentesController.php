@@ -7,12 +7,14 @@ use BolsaTrabajo\Celula;
 use BolsaTrabajo\Distrito;
 use BolsaTrabajo\Asistencia;
 use BolsaTrabajo\Seguimiento;
+use BolsaTrabajo\Historial;
 use Illuminate\Support\Facades\Auth; // Importa la clase Auth
 use Illuminate\Http\Request;
 use BolsaTrabajo\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+
 
 class AsistentesController extends Controller
 {
@@ -101,7 +103,7 @@ class AsistentesController extends Controller
         return response()->json(['success' => $status]);
     }
 
-    public function store(Request $request)
+    /* public function store(Request $request)
     {
         $status = false;
         $random = Str::upper(Str::random(4)); // Genera un string aleatorio en mayúsculas
@@ -151,6 +153,74 @@ class AsistentesController extends Controller
 
         // Redirigir con éxito o errores
         return redirect()->route('auth.asistentes')->with('success', 'Asistente registrado exitosamente.');
+    } */
+
+
+   
+
+    public function store(Request $request)
+    {
+        $status = false;
+        $random = Str::upper(Str::random(4)); // Genera un string aleatorio en mayúsculas
+        $foto = null;
+
+        // Validación de los datos del formulario
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'required|string|max:100',
+            'apellido' => 'required|string|max:100',
+            'distrito_id' => 'required|integer|exists:distritos,id',
+            'genero' => 'required|string|max:20',
+            'celula_id' => 'required|integer|exists:celulas,id',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        // Si se sube una foto, asigna un nombre único
+        if ($request->file('foto') != null) {
+            $foto = uniqid($random . "_") . '.' . $request->file('foto')->getClientOriginalExtension();
+        }
+
+        // Preparar los datos para crear el asistente
+        $data = [
+            'nombre' => $request->input('nombre'),
+            'apellido' => $request->input('apellido'),
+            'fecha_nac' => $request->input('fecha_nac'),
+            'distrito_id' => $request->input('distrito_id'),
+            'direccion' => $request->input('direccion'),
+            'tel' => $request->input('tel'),
+            'genero' => $request->input('genero'),
+            'celula_id' => $request->input('celula_id'),
+            'foto' => $foto ? 'uploads/fotos/' . $foto : null,
+        ];
+
+        DB::beginTransaction(); // Inicia una transacción para ambas inserciones
+        try {
+            // Crear el asistente
+            $asistente = Asistentes::create($data);
+
+            // Registrar en otra tabla la relación con celula_id
+            DB::table('historials')->insert([
+                'asistente_id' => $asistente->id,
+                'celula_id' => $request->input('celula_id'),
+                'accion' => 'Registro de nuevo asistente', // Aquí registramos "nuevo" como acción
+            ]);
+
+            // Mover la foto a la carpeta de destino
+            if ($request->file('foto') != null) {
+                $request->file('foto')->move(public_path('uploads/fotos'), $foto);
+            }
+
+            DB::commit(); // Confirma las operaciones
+            $status = true;
+        } catch (\Exception $e) {
+            DB::rollBack(); // Revierte todo si ocurre un error
+            return redirect()->back()->with('error', 'Error al registrar el asistente: ' . $e->getMessage());
+        }
+
+        // Redirigir con éxito
+        return redirect()->route('auth.asistentes')->with('success', 'Asistente registrado exitosamente.');
     }
 
 
@@ -167,7 +237,7 @@ class AsistentesController extends Controller
         ]);
     }
 
-    public function update(Request $request)
+    /* public function update(Request $request)
     {
         $status = false;
         // Validar la solicitud
@@ -216,8 +286,67 @@ class AsistentesController extends Controller
         if($asistente->save()) $status = true;    
         // Responder con éxito en formato JSON
         return response()->json(['Success' => $status, 'Errors' => $validator->errors()]);
-    }
+    } */
 
+    
+
+    public function update(Request $request)
+    {
+        $status = false;
+
+        // Validar la solicitud
+        $validator = Validator::make($request->all(), [
+            'id' => 'required|integer|exists:asistentes,id',
+            'foto' => 'nullable|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        // Buscar el asistente
+        $asistente = Asistentes::findOrFail($request->input('id'));
+
+        // Actualizar los datos del asistente
+        $asistente->nombre = $request->input('nombre');
+        $asistente->apellido = $request->input('apellido');
+        $asistente->fecha_nac = $request->input('fecha_nac');
+        $asistente->distrito_id = $request->input('distrito_id');
+        $asistente->direccion = $request->input('direccion');
+        $asistente->tel = $request->input('tel');
+        $asistente->genero = $request->input('genero');
+        $asistente->celula_id = $request->input('celula_id');
+        $asistente->estado = $request->input('estado');
+
+        // Manejar la foto si se sube una nueva
+        if ($request->hasFile('foto')) {
+            if ($asistente->foto && file_exists(public_path($asistente->foto))) {
+                unlink(public_path($asistente->foto));
+            }
+
+            $file = $request->file('foto');
+            $fileName = time() . '.' . $file->getClientOriginalExtension();
+            $filePath = 'uploads/fotos/';
+            $file->move(public_path($filePath), $fileName);
+
+            $asistente->foto = $filePath . $fileName;
+        }
+
+        // Guardar el asistente
+        if ($asistente->save()) {
+            $status = true;
+
+            // Registrar en historial (asistente_id, celula_id y acción)
+            Historial::create([
+                'asistente_id' => $asistente->id,
+                'celula_id' => $asistente->celula_id,
+                'accion' => 'Actualización de asistente realizada', // Acción específica
+            ]);
+        }
+
+        // Respuesta final
+        return response()->json(['Success' => $status, 'Errors' => $validator->errors()]);
+    }
 
     
 
