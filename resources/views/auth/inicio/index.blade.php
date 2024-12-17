@@ -30,6 +30,73 @@
 
         <div class="container">
             <!-- Shortcut Buttons Row -->
+            <div class="row justify-content-center mt-4">
+                <div class="col-lg-9">
+                    <!-- Barra de notificación 1: No te olvides de marcar asistencia -->
+                    <!-- Barra de notificación con icono -->
+                    <div class="alert alert-danger text-left mb-4" role="alert"
+                        style="font-size: 12px; background-color: #ff180026; color: #ff0000;">
+                        <span class="fa fa-calendar-check"></span>
+                        <i class="fa fa-info-circle" aria-hidden="true"></i> No te olvides de marcar asistencia.
+                        <a href="#" data-toggle="modal" data-target="#indicacionesModal"
+                            style="color: #007bff; text-decoration: underline; font-size:10px;"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Ver Indicaciones</a>
+                    </div>
+
+                    <!-- Modal de Indicaciones -->
+                    <div class="modal fade" id="indicacionesModal" tabindex="-1" role="dialog"
+                        aria-labelledby="indicacionesModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header" style="background-color: #ff180026; color: white;">
+                                    <h5 class="modal-title" id="indicacionesModalLabel">Indicaciones para Marcar Asistencia
+                                    </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Para garantizar que todos los asistentes sean registrados correctamente, por favor
+                                        sigue los siguientes pasos:</p>
+                                    <ul>
+                                        <li>1. Dirígete a la sección <strong>Gestión de Asistencia</strong> (Registro de
+                                            Asistencia).</li>
+                                        <li>2. Selecciona el <strong>programa</strong> y la <strong>célula</strong> que
+                                            estás liderando.</li>
+                                        <li>3. Marca a los <strong>asistentes</strong> y registra su estado:
+                                            <strong>PRESENTE</strong>, <strong>AUSENTE</strong> o
+                                            <strong>JUSTIFICADO</strong>.</li>
+                                        <li>4. Si tienes alguna duda, por favor contáctate con el encargado.</li>
+                                    </ul>
+                                    <p><strong>Recuerda:</strong></p>
+                                    <ul>
+                                        <li>Es necesario registrar el estado de todos los asistentes, independientemente de
+                                            cuál sea.</li>
+                                        <li>Si el estado es <strong>JUSTIFICADO</strong>, asegúrate de detallar la razón de
+                                            la ausencia.</li>
+                                        <li>Registrar la asistencia correctamente es fundamental para el seguimiento de las
+                                            actividades y la planificación de futuras reuniones.</li>
+                                    </ul>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-lg-9">
+                    <!-- Barra de notificación 2: No te olvides de registrar el seguimiento -->
+                    <div class="alert alert-danger text-left mb-4" role="alert"
+                        style="font-size: 12px;
+                        background-color: #ff180026;
+                        color: #ff0000;">
+                        <span class="fa fa-pencil-alt"></span> <i class="fa fa-info-circle" aria-hidden="true"></i> No te
+                        olvides de registrar el seguimiento.
+                    </div>
+                </div>
+            </div>
             <div class="row justify-content-center mb-4">
                 <div class="col-6 col-md-3 text-center mb-3">
                     <a href="{{ route('auth.asistencia') }}" class="btn"
@@ -39,17 +106,17 @@
                     </a>
                 </div>
                 <div class="col-6 col-md-3 text-center mb-3">
-                    <a href="{{ route('auth.asistentes') }}" class="btn"
-                        style="background-color: #007bff; color: #ffffff; padding: 15px 20px; border-radius: 10px; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
-                        <i class="fa fa-user-plus fa-2x"></i><br>
-                        <span style="font-size: 1.2em;">Reg. Asistentes</span>
-                    </a>
-                </div>
-                <div class="col-6 col-md-3 text-center mb-3">
                     <a href="{{ route('auth.seguimiento') }}" class="btn"
                         style="background-color: #384e63; color: #ffffff; padding: 15px 20px; border-radius: 10px; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
                         <i class="fa fa-folder-open fa-2x"></i><br>
                         <span style="font-size: 1.1em;">Reg. Seguimiento</span>
+                    </a>
+                </div>
+                <div class="col-6 col-md-3 text-center mb-3">
+                    <a href="{{ route('auth.asistentes') }}" class="btn"
+                        style="background-color: #007bff; color: #ffffff; padding: 15px 20px; border-radius: 10px; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                        <i class="fa fa-user-plus fa-2x"></i><br>
+                        <span style="font-size: 1.2em;">Reg. Asistentes</span>
                     </a>
                 </div>
                 <div class="col-6 col-md-3 text-center mb-3">
@@ -66,7 +133,6 @@
                     transform: translateY(-5px);
                 }
             </style>
-
             <div class="row justify-content-center">
                 <div class="col-lg-3 mb-4">
                     <div class="container rounded"
@@ -298,7 +364,7 @@
                 data: transformData(TotalDeAsistentesporCelula)
             }]
         });
-        
+
         Highcharts.chart('seguimiento', {
             chart: {
                 plotBackgroundColor: null,
