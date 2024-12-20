@@ -42,11 +42,15 @@ class ReasignarController extends Controller
             'asistente_id' => 'required|array', // Array de asistentes seleccionados
             'asistente_id.*' => 'exists:asistentes,id', // Verificar que los ID existen
             'celula_id' => 'required|exists:celulas,id', // Verificar que la nueva célula existe
+            'id_user' => 'required|exists:users,id', // Verificar que el id_user existe en la tabla users
         ]);
-
+    
+        // Obtener el ID del usuario si es necesario (si no se pasa en la solicitud, usaremos el autenticado)
+        $idUser = $request->id_user ?? auth()->user()->id; // Usamos el ID del usuario autenticado si no se pasa
+    
         // Obtener la nueva célula seleccionada
         $nuevaCelula = Celula::find($request->celula_id);
-
+    
         // Reasignar cada asistente a la nueva célula
         foreach ($request->asistente_id as $asistenteId) {
             // Obtener el asistente actual
@@ -57,18 +61,20 @@ class ReasignarController extends Controller
                 'asistente_id' => $asistente->id,
                 'celula_id' => $nuevaCelula->id, // Nueva célula
                 'fecha_inicio' => now(), // Fecha del cambio
-                'accion' => 'Reasignacion de forma masiva'
+                'accion' => 'Reasignacion de forma masiva',
+                'user_created' => $idUser, // ID del usuario (que se pasa o se obtiene de la autenticación)
             ]);
-
+    
             // Actualizar el asistente con la nueva célula
             $asistente->celula_id = $nuevaCelula->id;
             $asistente->save();
         }
-
+    
         // Redirigir a una página de éxito
         return redirect()->route('auth.reasignar')
-                        ->with('success', 'Asistentes reasignados correctamente.');
+                         ->with('success', 'Asistentes reasignados correctamente.');
     }
+    
 
     
 }
