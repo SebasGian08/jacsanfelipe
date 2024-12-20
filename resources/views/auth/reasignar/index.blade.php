@@ -79,7 +79,7 @@
                                                             id="asistente_{{ $asistente->id }}">
                                                         <label class="custom-control-label"
                                                             for="asistente_{{ $asistente->id }}">
-                                                            {{ $asistente->nombre }}{{ $asistente->apellido }}
+                                                            {{ $asistente->nombre }} {{ $asistente->apellido }}
                                                         </label>
                                                     </div>
                                                 </div>
