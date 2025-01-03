@@ -368,6 +368,9 @@ Route::group(['prefix' => 'auth', 'middleware' => 'auth:web'], function () {
         Route::get('/list_all', 'Auth\AniversarioController@list_all')->name('auth.aniversario.list_all');  
         Route::get('/partialView/{id}', 'Auth\AniversarioController@partialView')->name('auth.aniversario.create');
     });
+
+
+
     
     Route::group(['prefix' => 'opinion'], function () {
         Route::get('', 'Auth\OpinionController@index')->name('auth.opinion');
@@ -391,7 +394,9 @@ Route::get('/aniversario', 'App\AniversarioController@index')->name('app.anivers
 Route::post('/aniversario/store', 'App\AniversarioController@store')->name('aniversario.store');
 //P��gina principal registrar opiniones
 Route::post('/home/store', 'App\HomeController@store')->name('home.store');
-
+//CampamentoIE
+Route::get('/campamento', 'App\CampamentoController@index')->name('app.campamento.index');
+Route::post('/campamento/store', 'App\CampamentoController@store')->name('campamento.store');
 
 Route::group(['prefix' => 'auth'], function () {
     Route::get('/', 'Auth\LoginController@showLoginForm');
