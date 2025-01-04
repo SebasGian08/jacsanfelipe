@@ -15,7 +15,16 @@
     <div class="form-register">
         <form class="form-login" action="{{ route('campamento.store') }}" method="post" enctype="multipart/form-data">
             @csrf
-
+            <div class="content_titulo_login" style="text-align: center;">
+                <img src="{{ asset('app/img/logorj.png') }}" alt="Logo JAC" style="width: 300px;"><br><br>
+                {{-- <span style="font-size: 1.5em; font-weight: bold;">ANIVERSARIO JAC</span>
+                <p class="title_" style="margin: 5px 0;">Código de vestimenta: <strong>Formal/elegante</strong>
+                </p>
+                <p style="margin: 5px 0;">
+                    <i class="fas fa-money-bill-wave" style="vertical-align: middle; margin-right: 5px;"></i>
+                    Colaboración: <strong>S/7.00</strong>
+                </p> --}}
+            </div> <br><br>
             <input type="hidden" name="id_nuevo" id="id_nuevo" value="10" required>
             <div class="form-group">
                 <label for="nombres" class="text-primary-m">Nombre y Apellido</label>
@@ -155,43 +164,43 @@
 
 
 <style>
-   body {
-    background-image: url('fondo.jpg');
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-}
+    body {
+        background-image: url('fondo.jpg');
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+    }
 
-.form-register {
-    /* width: 90%;
+    .form-register {
+        /* width: 90%;
     max-width: 900px; */
-    background: #24303c;
-    margin: 100px;
-    padding: 40px;
-    border-radius: 50px;
-    font-family: 'calibri';
-    color: white;
-    box-shadow: 7px 13px 37px rgba(0, 0, 0, 0.7);
-}
+        background: #24303c;
+        margin: 100px;
+        padding: 40px;
+        border-radius: 50px;
+        font-family: 'calibri';
+        color: white;
+        box-shadow: 7px 13px 37px rgba(0, 0, 0, 0.7);
+    }
 
-.controls {
-    width: 100%;
-    background: #24303c;
-    padding: 10px;
-    border-radius: 4px;
-    margin-bottom: 16px;
-    border: 1px solid #1f53c5;
-    font-family: 'calibri';
-    font-size: 18px;
-    color: white;
-}
+    .controls {
+        width: 100%;
+        background: #24303c;
+        padding: 10px;
+        border-radius: 4px;
+        margin-bottom: 16px;
+        border: 1px solid #1f53c5;
+        font-family: 'calibri';
+        font-size: 28px;
+        color: white;
+        margin: 20px 20px 0 0;
+    }
 
-.form-register .btn-m {
-    width: 100%;
-    padding: 12px;
-    font-size: 16px;
-}
-
+    .form-register .btn-m {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+    }
 </style>
