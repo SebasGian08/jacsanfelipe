@@ -27,7 +27,7 @@ label {
 .btn-primary-gradient {
     width: 100%;
     /*  background: linear-gradient(90deg, rgba(0,114,191,1) 37%, rgba(0,195,244,1) 100%); */
-    font-size: 30px;
+    font-size: 15px;
     background: #007bff;
     border-radius: 30px;
     padding: 20px 20px 20px 20px;
@@ -88,11 +88,11 @@ label {
 }
 
 .content_login {
-    background: #ffffffdf;
-    border-radius: 5px;
+    background: #24303c;
+    border-radius: 50px;
     box-shadow: -1px 2px 3px 0px rgba(122, 122, 122, 0.415);
     width: 90%;
-    padding: 2%;
+    padding: 8%;
 }
 
 .content_crear_alumno {
