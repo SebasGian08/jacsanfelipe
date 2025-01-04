@@ -15,16 +15,15 @@
     <div class="form-register">
         <form class="form-login" action="{{ route('campamento.store') }}" method="post" enctype="multipart/form-data">
             @csrf
-            <div class="content_titulo_login" style="text-align: center;">
+            <div class="content_titulo_login" style="text-align: center; padding: 20px; background: linear-gradient(135deg, #007bff, #00c6ff); border-radius: 15px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); color: white;">
                 <img src="{{ asset('app/img/logorj.png') }}" alt="Logo JAC" style="width: 300px;"><br><br>
-                {{-- <span style="font-size: 1.5em; font-weight: bold;">ANIVERSARIO JAC</span>
-                <p class="title_" style="margin: 5px 0;">Código de vestimenta: <strong>Formal/elegante</strong>
-                </p>
-                <p style="margin: 5px 0;">
+                <span style="margin-top:30px !important;font-size: 2.8em; font-weight: bold;color:white;">CAMPAMENTO IE 2025</span>
+                <p style="margin-top:30px; font-size: 35px !important; font-weight: bold; color: #24303c;">
                     <i class="fas fa-money-bill-wave" style="vertical-align: middle; margin-right: 5px;"></i>
-                    Colaboración: <strong>S/7.00</strong>
-                </p> --}}
-            </div> <br><br>
+                    Colaboración: <strong style="font-size: 1.2em;">S/200.00</strong>
+                </p>
+            </div>
+             <br><br>
             <input type="hidden" name="id_nuevo" id="id_nuevo" value="10" required>
             <div class="form-group">
                 <label for="nombres" class="text-primary-m">Nombre y Apellido</label>
@@ -56,8 +55,8 @@
             <div class="form-group">
                 <label for="tel" class="text-primary-m">WhatsApp</label>
                 <input type="text" id="tel" name="tel"
-                    class="controls {{ $errors->has('tel') ? ' is-invalid' : '' }}" value="{{ old('tel') }}" required
-                    placeholder="Ej: 987654321">
+                    class="controls {{ $errors->has('tel') ? ' is-invalid' : '' }}" value="{{ old('tel') }}"
+                    required placeholder="Ej: 987654321">
             </div>
             <br>
             <div class="form-group col-lg-6">
