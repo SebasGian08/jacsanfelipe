@@ -29,12 +29,12 @@
                     <!-- Células Select -->
                     <div class="form-group col-12">
                         <label for="celulas" class="text-primary-m">RED JUVENIL A LA QUE ASISTES</label> <small
-                            class="form-text text-muted">
+                            class="form-text text-muted" style="font-size: 30px">
                             (Si no asistes a ninguna red, seleccione <strong>NUEVO)</strong>.
                         </small>
                         <select id="ministerio_id" name="ministerio_id" class="form-control-m form-control-lg"
-                            style="background:white !important;height: 3.573667rem;" required>
-                            <option value="" disabled selected>Selecciona tu red a la que aistes...</option>
+                            style="background:white !important;height: 5.573667rem;font-size:30px" required>
+                            <option value="" disabled selected>Seleccionar...</option>
                             @foreach ($ministerio as $ministerio)
                                 <option value="{{ $ministerio->id }}">{{ $ministerio->nombre }}</option>
                             @endforeach
@@ -84,7 +84,7 @@
                         .file-label {
                             color: #007bff;
                             font-weight: bold;
-                            font-size: 1.1rem;
+                            font-size: 30px;
                         }
 
                         .file-upload:hover {
@@ -123,18 +123,18 @@
                     <br>
                     <div class="form-group col-lg-6">
                         <div class="text-left"
-                            style="padding: 15px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9;  margin: auto; text-align: center;">
-                            <p style="color: #6c757d; font-size: 16px;">
+                            style="padding: 15px; border: 1px solid #ccc; border-radius: 8px; background-color: #fdedff;  margin: auto; text-align: center;">
+                            <p style="color: #6c757d; font-size: 25px;">
                                 <img src="https://perupacific.com/wp-content/uploads/2020/04/ICONOS-yape-para-pagina-png.png"
                                     alt="Yape" style="width: 24px; vertical-align: middle; margin-right: 8px;">
-                                Envía tu <strong>Yape</strong> al número <br><strong style="color: #9e1eaa;">955 794
+                                Envía tu <strong>Yape</strong> al número <strong style="color: #9e1eaa;">955 794
                                     014</strong> - Belén Llanos.
                             </p>
                         </div>
                     </div>
                     <br><br>
                     <div class="">
-                        <button type="submit" class="btn-m btn-primary-gradient">Registrar</button>
+                        <button type="submit" class="btn-m btn-primary-gradient"><i class="fa fa-save"></i> Registrar Asistencia</button>
                     </div>
                     <br>
                     {{-- Mensajes de éxito y error --}}
