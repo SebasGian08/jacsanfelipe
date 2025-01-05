@@ -10,7 +10,7 @@ class Historial extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'asistente_id', 'celula_id', 'fecha_inicio','accion'
+        'asistente_id', 'celula_id', 'fecha_inicio','accion','user_created'
     ];
 
     public $timestamps = false;
