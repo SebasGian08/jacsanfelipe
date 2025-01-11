@@ -52,6 +52,7 @@ class CampamentoController extends Controller
             'tel' => $request->input('tel'),
             'foto' => $fotoPath, // Asignar la ruta de la foto
             'edad' => $request->input('edad'),
+            'ministerio_id' => $request->input('ministerio_id')
         ];
     
         // Crear una nueva instancia del modelo
