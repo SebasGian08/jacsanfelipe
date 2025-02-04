@@ -17,9 +17,10 @@ class CelulaController extends Controller
 
     public function index()
     {
-        $user = User::all();
-        return view('auth.celula.index', ['user' => $user]);
+        $users = User::where('estado', 1)->get();
+        return view('auth.celula.index', ['user' => $users]);
     }
+
       
 
     public function list_all()
