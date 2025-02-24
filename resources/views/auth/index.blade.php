@@ -23,15 +23,17 @@
         /* CAMBIAR THEME DE SISTEMA */
         header {
             background-color: white !important;
-            background-color: #ffffff !important;
+            background-color:rgb(26, 26, 26) !important;
         }
 
         .content-wrapper:before {
-            background: radial-gradient(circle, rgba(0, 114, 191, 1) 37%, rgba(0, 195, 244, 1) 100%);
+            /* background: radial-gradient(circle, rgba(0, 114, 191, 1) 37%, rgba(0, 195, 244, 1) 100%); */
+            background-color:rgb(41, 41, 41);
         }
 
         .main-nav {
-            background: radial-gradient(circle, rgba(0, 114, 191, 1) 37%, rgba(0, 195, 244, 1) 100%);
+            /* background: radial-gradient(circle, rgba(0, 114, 191, 1) 37%, rgba(0, 195, 244, 1) 100%);} */
+            background-color:rgb(41, 41, 41);
         }
 
         /*.active-item-here {
