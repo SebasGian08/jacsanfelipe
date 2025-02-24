@@ -123,11 +123,11 @@
 
         <header class="main-header">
             <div class="inside-header">
-                {{-- <a href="{{ route('auth.inicio') }}" class="logo">
+                <a href="{{ route('auth.inicio') }}" class="logo">
                     <span class="logo-m">
                         <img src="{{ asset('app/img/logojac.png') }}" alt="logo" class="light-logo">
                     </span>
-                </a> --}}
+                </a>
                 <nav class="navbar navbar-static-top">
                     <a href="#" class="sidebar-toggle d-block d-lg-none" data-toggle="push-menu" role="button"
                         style="color: #ffffff;">
