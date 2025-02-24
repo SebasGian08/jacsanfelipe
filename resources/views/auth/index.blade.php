@@ -20,23 +20,23 @@
 <body>
 
     <style>
-        /* CAMBIAR THEME DE SISTEMA */
-        header {
-            background-color: white !important;
-            background-color:rgb(26, 26, 26) !important;
-        }
+    /* CAMBIAR THEME DE SISTEMA */
+    header {
+        background-color: white !important;
+        background-color: rgb(26, 26, 26) !important;
+    }
 
-        .content-wrapper:before {
-            /* background: radial-gradient(circle, rgba(0, 114, 191, 1) 37%, rgba(0, 195, 244, 1) 100%); */
-            background-color:rgb(41, 41, 41);
-        }
+    .content-wrapper:before {
+        /* background: radial-gradient(circle, rgba(0, 114, 191, 1) 37%, rgba(0, 195, 244, 1) 100%); */
+        background-color: rgb(41, 41, 41);
+    }
 
-        .main-nav {
-            /* background: radial-gradient(circle, rgba(0, 114, 191, 1) 37%, rgba(0, 195, 244, 1) 100%);} */
-            background-color:rgb(41, 41, 41);
-        }
+    .main-nav {
+        /* background: radial-gradient(circle, rgba(0, 114, 191, 1) 37%, rgba(0, 195, 244, 1) 100%);} */
+        background-color: rgb(41, 41, 41);
+    }
 
-        /*.active-item-here {
+    /*.active-item-here {
             color: #34495e;
         }
 
@@ -44,76 +44,76 @@
             background-color: #34495e;
         }*/
 
-        .btn-secondary {
-            color: #fff;
-            background-color: #2ecc71;
-            border-color: #2ecc71;
-        }
+    .btn-secondary {
+        color: #fff;
+        background-color: #2ecc71;
+        border-color: #2ecc71;
+    }
 
-        .btn-secondary:hover {
-            color: #fff;
-            background-color: #1cb65c;
-            border-color: #1cb65c;
-        }
+    .btn-secondary:hover {
+        color: #fff;
+        background-color: #1cb65c;
+        border-color: #1cb65c;
+    }
 
+    div.dataTables_wrapper div.dataTables_filter input {
+        width: 100% !important;
+    }
+
+    @media screen and (max-width:503px) {
         div.dataTables_wrapper div.dataTables_filter input {
             width: 100% !important;
         }
+    }
 
-        @media screen and (max-width:503px) {
-            div.dataTables_wrapper div.dataTables_filter input {
-                width: 100% !important;
-            }
-        }
+    .modal.modal-fill .modal-dialog .modal-header {
+        background-color: #ffffff !important;
+    }
 
-        .modal.modal-fill .modal-dialog .modal-header {
-            background-color: #ffffff !important;
-        }
+    .modal.modal-fill {
+        background: rgba(135, 189, 236, 0.305) !important;
+    }
 
-        .modal.modal-fill {
-            background: rgba(135, 189, 236, 0.305) !important;
-        }
+    header {
+        padding-top: 5px;
+    }
 
-        header {
-            padding-top: 5px;
-        }
+    .li_notifi {
+        background: rgb(215, 215, 215);
+        cursor: pointer;
+        padding: 5px 10px !important;
+        border: 0px 0px 2px 0px solid rgb(104, 104, 104) !important;
+    }
 
-        .li_notifi {
-            background: rgb(215, 215, 215);
-            cursor: pointer;
-            padding: 5px 10px !important;
-            border: 0px 0px 2px 0px solid rgb(104, 104, 104) !important;
-        }
+    .li_notifi:hover {
+        background: rgb(231, 229, 229) !important;
+    }
 
-        .li_notifi:hover {
-            background: rgb(231, 229, 229) !important;
-        }
+    .logo img {
+        max-width: 100%;
+        /* Ajusta para no salirse del contenedor */
+        height: auto;
+        /* Mantiene la proporción */
+    }
 
+    @media (max-width: 767px) {
         .logo img {
-            max-width: 100%;
-            /* Ajusta para no salirse del contenedor */
-            height: auto;
-            /* Mantiene la proporción */
+            width: 90px !important;
         }
+    }
 
-        @media (max-width: 767px) {
-            .logo img {
-                width: 90px !important;
-            }
+    @media (min-width: 768px) {
+        .logo img {
+            max-width: 50%;
+            /* Ajusta el tamaño para pantallas más grandes */
         }
+    }
 
-        @media (min-width: 768px) {
-            .logo img {
-                max-width: 50%;
-                /* Ajusta el tamaño para pantallas más grandes */
-            }
-        }
-
-        .logo-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+    .logo-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     </style>
     <div class="wrapper">
 
@@ -203,61 +203,54 @@
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav">
                         @if (Auth::guard('web')->user()->profile_id == \BolsaTrabajo\App::$PERFIL_DESARROLLADOR ||
-                                Auth::guard('web')->user()->profile_id == \BolsaTrabajo\App::$PERFIL_ADMINISTRADOR ||
-                                Auth::guard('web')->user()->profile_id == \BolsaTrabajo\App::$PERFIL_LIDER)
-                            <li class="nav-item {{ Route::currentRouteName() == 'auth.inicio' ? 'active' : '' }}">
-                                <a class="nav-link" href="{{ route('auth.inicio') }}"><span
-                                        class="active-item-here"></span>
-                                    <i class="fa fa-home mr-5"></i> <span>Inicio</span>
-                                </a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-calendar mr-5"></i>
-                                    <span>Actividades</span></a>
-                                <ul class="dropdown-menu multilevel scale-up-left">
-                                    <li class="nav-item"><a class="nav-link"
-                                            href="{{ route('auth.calendario') }}"><i class="fa fa-calendar mr-5"></i>
-                                            Calendario de Actividades</a>
-                                    </li>
-                                    <li class="nav-item"><a class="nav-link"
-                                            href="{{ route('auth.calendario.listado') }}"><i
-                                                class="fa fa-calendar mr-5"></i> Listado de Actividades</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-calendar mr-5"></i>
-                                    <span>Gestión de Celulas</span></a>
-                                <ul class="dropdown-menu multilevel scale-up-left">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('auth.celula') }}">
-                                            <i class="fa fa-user mr-5"></i> Gestión de Celulas
-                                        </a>
-                                    </li>
-                            </li>
-                            @if (Auth::guard('web')->user()->profile_id == \BolsaTrabajo\App::$PERFIL_DESARROLLADOR)
-                            <li class="nav-item"><a class="nav-link"
-                                    href="{{ route('auth.reasignar') }}"><i class="fa fa-save mr-5"></i>
-                                    Reasignar Asistente</a>
-                            </li>
-                            @endif
-                    </ul>
+                        Auth::guard('web')->user()->profile_id == \BolsaTrabajo\App::$PERFIL_ADMINISTRADOR ||
+                        Auth::guard('web')->user()->profile_id == \BolsaTrabajo\App::$PERFIL_LIDER)
+                        <li class="nav-item {{ Route::currentRouteName() == 'auth.inicio' ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('auth.inicio') }}"><span class="active-item-here"></span>
+                                <i class="fa fa-home mr-5"></i> <span>Inicio</span>
+                            </a>
+                        </li>
+                        @if (Auth::guard('web')->user()->profile_id == \BolsaTrabajo\App::$PERFIL_DESARROLLADOR)
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <i class="fa fa-calendar mr-5"></i>
+                                <span>Actividades</span></a>
+                            <ul class="dropdown-menu multilevel scale-up-left">
+                                <li class="nav-item"><a class="nav-link" href="{{ route('auth.calendario') }}"><i
+                                            class="fa fa-calendar mr-5"></i>
+                                        Calendario de Actividades</a>
+                                </li>
+                                <li class="nav-item"><a class="nav-link"
+                                        href="{{ route('auth.calendario.listado') }}"><i
+                                            class="fa fa-calendar mr-5"></i> Listado de Actividades</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <i class="fa fa-calendar mr-5"></i>
+                                <span>Gestión de Celulas</span></a>
+                            <ul class="dropdown-menu multilevel scale-up-left">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('auth.celula') }}">
+                                        <i class="fa fa-user mr-5"></i> Gestión de Celulas
+                                    </a>
+                                </li>
+                        </li>
 
-                    {{-- <li class="nav-item {{ Route::currentRouteName() == 'auth.celula' ? 'active' : '' }}">
-                                <a class="nav-link" href="{{ route('auth.celula') }}"><span
-                                        class="active-item-here"></span>
-                                    <i class="fa fa-users mr-5"></i>
-                                    <span>Gestión de Células</span>
-                                </a>
-                         </li> --}}
+                        <li class="nav-item"><a class="nav-link" href="{{ route('auth.reasignar') }}"><i
+                                    class="fa fa-save mr-5"></i>
+                                Reasignar Asistente</a>
+                        </li>
+                        @endif
+                    </ul>
                     @endif
+                    @if (Auth::guard('web')->user()->profile_id == \BolsaTrabajo\App::$PERFIL_DESARROLLADOR)
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
                             <span class="active-item-here"></span>
                             <i class="fa fa-user mr-5"></i>
                             <span>Gestión de Asistencia</span>
@@ -281,32 +274,32 @@
                             </li>
                         </ul>
                     </li>
-
+                    @endif
                     @if (Auth::guard('web')->user()->profile_id == \BolsaTrabajo\App::$PERFIL_DESARROLLADOR ||
-                            Auth::guard('web')->user()->profile_id == \BolsaTrabajo\App::$PERFIL_ADMINISTRADOR)
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                                <span class="active-item-here"></span> {{-- <i class="fa fa-cog mr-5"></i> --}}
-                                <span>Ver más</span></a>
-                            <ul class="dropdown-menu multilevel scale-up-left">
-                                <li class="nav-item"><a class="nav-link" href="{{ route('auth.usuarios') }}"><i
-                                            class="fa fa-user mr-5"></i> Gestión de
-                                        Usuarios</a>
-                                </li>
-                                <li class="nav-item"><a class="nav-link" href="{{ route('auth.aniversario') }}"><i
-                                            class="fa fa-gift mr-5"></i>
-                                        Aniversario JAC</a>
-                                </li>
-                                <li class="nav-item"><a class="nav-link" href="{{ route('auth.opinion') }}"><i
-                                            class="fa fa-star mr-5"></i> Opiniones y Calificaciones</a>
-                                </li>
-                                <li class="nav-item"><a class="nav-link" href="{{ route('auth.caminodelhijo') }}">
-                                        <i class="fa fa-book mr-5"></i>
-                                        Camino del hijo - Cursos</a>
-                                </li>
-                            </ul>
-                        </li>
+                    Auth::guard('web')->user()->profile_id == \BolsaTrabajo\App::$PERFIL_ADMINISTRADOR)
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            <span class="active-item-here"></span> {{-- <i class="fa fa-cog mr-5"></i> --}}
+                            <span>Ver más</span></a>
+                        <ul class="dropdown-menu multilevel scale-up-left">
+                            <li class="nav-item"><a class="nav-link" href="{{ route('auth.usuarios') }}"><i
+                                        class="fa fa-user mr-5"></i> Gestión de
+                                    Usuarios</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('auth.aniversario') }}"><i
+                                        class="fa fa-gift mr-5"></i>
+                                    Aniversario JAC</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('auth.opinion') }}"><i
+                                        class="fa fa-star mr-5"></i> Opiniones y Calificaciones</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('auth.caminodelhijo') }}">
+                                    <i class="fa fa-book mr-5"></i>
+                                    Camino del hijo - Cursos</a>
+                            </li>
+                        </ul>
+                    </li>
                     @endif
                 </div>
             </nav>
@@ -331,7 +324,8 @@
     <script type="text/javascript" src="{{ asset('auth/plugins/popper.min.js') }}"></script>
     {{-- <script type="" src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script> --}}
     <script type="text/javascript" src="{{ asset('auth/plugins/jquery-3.3.1/jquery-3.3.1.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('auth/plugins/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('auth/plugins/jquery-slimscroll/jquery.slimscroll.min.js') }}">
+    </script>
     <script type="text/javascript" src="{{ asset('auth/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('auth/plugins/toggle-sidebar/index.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('auth/plugins/sweetalert/sweetalert.min.js') }}"></script>
@@ -368,10 +362,20 @@
         });
     </script> --}}
     <script type="text/javascript">
-        const usuarioLoggin = {
-            user_id: {{ \Illuminate\Support\Facades\Auth::guard('web')->user()->id }},
-            profile_id: {{ \Illuminate\Support\Facades\Auth::guard('web')->user()->profile_id }}
+    const usuarioLoggin = {
+        user_id: {
+            {
+                \
+                Illuminate\ Support\ Facades\ Auth::guard('web') - > user() - > id
+            }
+        },
+        profile_id: {
+            {
+                \
+                Illuminate\ Support\ Facades\ Auth::guard('web') - > user() - > profile_id
+            }
         }
+    }
     </script>
 
     @yield('scripts')

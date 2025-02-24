@@ -123,14 +123,17 @@
                     <span style="font-size: 1.2em;">REGISTRAR ASISTENTES</span>
                 </a>
             </div>
+            @if (Auth::guard('web')->user()->profile_id == \BolsaTrabajo\App::$PERFIL_DESARROLLADOR ||
+            Auth::guard('web')->user()->profile_id == \BolsaTrabajo\App::$PERFIL_ADMINISTRADOR)
             <div class="col-12 col-md-3 text-cente">
                 <a href="{{ route('auth.asistencia.listado') }}" class="btn"
                     style="width:100%;background-color: #ffc107; color: #ffffff; margin: 10px 1px 10px 1px;
     padding: 15px 20px 20px 20px; border-radius: 10px; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
                     <i class="fa fa-calendar fa-2x"></i><br>
-                    <span style="font-size: 1.2em;">List. Asistencia</span>
+                    <span style="font-size: 1.2em;">LISTADO DE ASISTENCIA</span>
                 </a>
             </div>
+            @endif
         </div>
         <style>
         .btn:hover {
