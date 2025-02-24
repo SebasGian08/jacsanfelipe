@@ -42,11 +42,11 @@
                             <!-- Fecha de Nacimiento Field -->
                             <div class="form-group col-lg-6">
                                 <label for="fecha_nac" class="m-0 label-primary">
-                                    Fecha de Nacimiento <b style="color:red;font-size:10px">(Obligatorio*)</b>
+                                    Fecha de Nacimiento
                                 </label>
                                 <div class="input-group">
                                     <input type="date" class="form-input" name="fecha_nac" id="fecha_nac"
-                                        value="{{ $Entity ? $Entity->fecha_nac : '' }}" required>
+                                        value="{{ $Entity ? $Entity->fecha_nac : '' }}">
                                 </div>
                             </div>
                             <!-- Distrito Field -->
@@ -68,21 +68,21 @@
                             <!-- Dirección Field -->
                             <div class="form-group col-lg-6">
                                 <label for="direccion" class="m-0 label-primary">
-                                    Dirección <b style="color:red;font-size:10px">(Obligatorio*)</b>
+                                    Dirección
                                 </label>
                                 <div class="input-group">
                                     <input type="text" class="form-input" name="direccion" id="direccion"
-                                        value="{{ $Entity ? $Entity->direccion : '' }}" autocomplete="off" required>
+                                        value="{{ $Entity ? $Entity->direccion : '' }}" autocomplete="off">
                                 </div>
                             </div>
                             <!-- Teléfono Field -->
                             <div class="form-group col-lg-6">
                                 <label for="telefono" class="m-0 label-primary">
-                                    Teléfono <b style="color:red;font-size:10px">(Obligatorio*)</b>
+                                    Teléfono
                                 </label>
                                 <div class="input-group">
                                     <input type="text" class="form-input" name="tel" id="tel"
-                                        value="{{ $Entity ? $Entity->tel : '' }}" autocomplete="off" required>
+                                        value="{{ $Entity ? $Entity->tel : '' }}" autocomplete="off">
                                 </div>
                             </div>
                             <!-- Género Field -->
@@ -96,7 +96,7 @@
                                             {{ $Entity && $Entity->genero == 'masculino' ? 'selected' : '' }}>Masculino
                                         </option>
                                         <option value="femenino"
-                                            {{ $Entity && $Entity->genero == 'masculino' ? 'selected' : '' }}>Femenino
+                                            {{ $Entity && $Entity->genero == 'femenino' ? 'selected' : '' }}>Femenino
                                         </option>
                                     </select>
                                 </div>
