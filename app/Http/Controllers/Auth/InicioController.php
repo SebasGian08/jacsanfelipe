@@ -124,6 +124,7 @@ class InicioController extends Controller
             ->where('s.estado', 'presente') // filtrar solo las asistencias con estado "presente"
             ->select('a.nombre as asistente', DB::raw('COUNT(*) as total_asistencias'))
             ->groupBy('a.nombre')
+            ->limit(4) // Limitar solo a 4 resultados
             ->get();
 
             // Preparar los datos para Highcharts
@@ -152,6 +153,7 @@ class InicioController extends Controller
             ->where('s.estado', 'ausente') // filtrar solo las asistencias con estado "ausente"
             ->select('a.nombre as asistente', DB::raw('COUNT(*) as total_asistencias'))
             ->groupBy('a.nombre')
+            ->limit(4) // Limitar solo a 4 resultados
             ->get();
 
             // Preparar los datos para Highcharts
