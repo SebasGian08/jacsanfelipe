@@ -28,7 +28,11 @@ class ReasignarController extends Controller
                  ->whereNull('deleted_at') // Excluir registros eliminados
                  ->orderBy('nombre', 'asc')
                  ->get();
-        $asistentes = Asistentes::orderBy('nombre', 'asc')->get()->groupBy('celula_id');
+        $asistentes = Asistentes::where('estado', 1)
+                 ->orderBy('nombre', 'asc')
+                 ->get()
+                 ->groupBy('celula_id');
+             
         $User = Auth::guard('web')->user();
         $userId = $User->id; // Extraer el ID del usuario         
         return view('auth.reasignar.index', compact('celulas','asistentes','userId'));
