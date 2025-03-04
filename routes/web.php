@@ -387,6 +387,10 @@ Route::group(['prefix' => 'auth', 'middleware' => 'auth:web'], function () {
         Route::post('/store', 'Auth\ReasignarController@store')->name('auth.reasignar.store');
     });
 
+    Route::group(['prefix' => 'micelula'], function () { 
+        Route::get('', 'Auth\MicelulaController@index')->name('auth.micelula');
+    });
+
 });
 
 // Ruta para almacenar un nuevo asistente para el aniversario JAC

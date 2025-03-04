@@ -66,7 +66,7 @@ class ReasignarController extends Controller
                 'celula_id' => $nuevaCelula->id, // Nueva célula
                 'fecha_inicio' => now(), // Fecha del cambio
                 'accion' => 'Reasignacion de forma masiva',
-                'user_created' => $idUser, // ID del usuario (que se pasa o se obtiene de la autenticación)
+                'user_id' => $idUser, // ID del usuario (que se pasa o se obtiene de la autenticación)
             ]);
     
             // Actualizar el asistente con la nueva célula

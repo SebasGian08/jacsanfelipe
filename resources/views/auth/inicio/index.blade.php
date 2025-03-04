@@ -98,6 +98,8 @@
                 </div>
             </div>
         </div>
+        @if (Auth::guard('web')->user()->profile_id == \BolsaTrabajo\App::$PERFIL_DESARROLLADOR ||
+            Auth::guard('web')->user()->profile_id == \BolsaTrabajo\App::$PERFIL_LIDER)
         <div class="row justify-content-center mb-4">
             <div class="col-12 col-md-3 text-center">
                 <a href="{{ route('auth.asistencia') }}" class="btn"
@@ -123,6 +125,15 @@
                     <span style="font-size: 1.2em;">REGISTRAR ASISTENTES</span>
                 </a>
             </div>
+            <div class="col-12 col-md-3 text-center">
+                <a href="{{ route('auth.micelula') }}" class="btn"
+                    style="width:100%;background-color: #7b00ff; color: #ffffff; margin: 10px 1px 10px 1px;
+            padding: 15px 20px 20px 20px; border-radius: 10px; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                    <i class="fa fa-hand-peace-o fa-2x"></i><br>
+                    <span style="font-size: 1.2em;">MI CÉLULA</span>
+                </a>
+            </div>
+            @endif
             @if (Auth::guard('web')->user()->profile_id == \BolsaTrabajo\App::$PERFIL_DESARROLLADOR ||
             Auth::guard('web')->user()->profile_id == \BolsaTrabajo\App::$PERFIL_ADMINISTRADOR)
             <div class="col-12 col-md-3 text-cente">
