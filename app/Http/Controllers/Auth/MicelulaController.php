@@ -20,17 +20,19 @@ class MicelulaController extends Controller
     public function index()
     {
         $user = Auth::guard('web')->user(); // Usuario autenticado
-        $celula = Celula::where('lider_id', $user->id)->first(); // Buscar célula del usuario
+        $celulas = Celula::where('lider_id', $user->id)->get(); // Obtener todas las células del líder
 
-        if (!$celula) {
+        if ($celulas->isEmpty()) {
             return redirect()->back()->with('error', 'No tienes una célula asignada.');
         }
 
+        // Obtener los asistentes de todas las células que lidera el usuario
         $asistentes = Asistentes::where('estado', 1)
-                    ->where('celula_id', $celula->id)
+                    ->whereIn('celula_id', $celulas->pluck('id')) // Filtrar por todas las células del líder
                     ->orderBy('nombre', 'asc')
                     ->get();
 
-        return view('auth.micelula.index', compact('celula', 'asistentes'));
+        return view('auth.micelula.index', compact('celulas', 'asistentes'));
     }
+
 }
