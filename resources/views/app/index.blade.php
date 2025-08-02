@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="https://www.ial.edu.pe/isotipo.png">
-    <meta name="title" content="Instituto Arzobispo Loayza"/>
+    <link rel="shortcut icon" href="{{ asset('app/img/logo_ial.png') }}">
+    <meta name="title" content="Jac San felipe"/>
     <meta name="description" content=""/>
     <meta name="keywords" content="">
     <meta property="og:title" content="">
     <meta property="og:description" content="">
     <meta property="og:image" content="">
     <meta property="og:url" content="">
-    <meta property="og:site_name" content="Instituto Arzobispo Loayza">
+    <meta property="og:site_name" content="Jac San Felipe">
     <meta property="og:type" content="website">
     <meta name="author" content="MAJML" />
     <meta name="Resource-type" content="Document" />
     <link rel="shortcut icon" href="{{ asset('app/img/logo_ial.png') }}" type="image/x-icon">
     <meta http-equiv="X-UA-Compatible" content="IE=5; IE=6; IE=7; IE=8; IE=9; IE=10">
-    <title>Bolsa de Trabajo</title>
+    <title>JAC San Felipe</title>
     <link rel="stylesheet" href="{{ asset('app/plugins/bootstrap4/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('app/plugins/font-awesome/css/font-awesome.css') }}">
     <link rel="stylesheet" href="{{ asset('app/plugins/transitions.css') }}">

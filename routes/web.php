@@ -421,3 +421,5 @@ Route::get('publicar_oferta', 'Auth\LoginController@view_publicar_oferta');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/store', 'Auth\AsistenciaController@store')->name('auth.asistencia.store');
+ Route::post('/asistentesPorCelula', 'Auth\AsistenciaController@asistentesPorCelula')->name('auth.asistentes.asistentesPorCelula');

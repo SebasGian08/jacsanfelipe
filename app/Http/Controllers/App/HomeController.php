@@ -12,6 +12,8 @@ use BolsaTrabajo\Distrito;
 use BolsaTrabajo\Empresa;
 use BolsaTrabajo\Provincia;
 use BolsaTrabajo\User;
+use BolsaTrabajo\TipoPrograma;
+use BolsaTrabajo\Celula;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use BolsaTrabajo\Http\Controllers\Controller;
@@ -47,11 +49,15 @@ class HomeController extends Controller
             $alum->save();
         }
     }
-
+    
     public function index()
     {
-        return view('app.home.index');
+        $tipoprograma = TipoPrograma::all();
+        $celulas = Celula::where('estado', 1)->whereNull('deleted_at')->get();
+        return view('app.home.index', compact('tipoprograma','celulas'));
     }
+
+    
 
     public function loginEmpresa()
     {

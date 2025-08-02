@@ -1,106 +1,224 @@
-{{-- @extends('app.index') --}}
+@extends('app.index')
 
 @section('styles')
 {{-- <link rel="stylesheet" href="{{ asset('app/css/home/index.css') }}"> --}}
 @endsection
 
-@section('content')
+
+
+@section('scripts')
+<script type="text/javascript" src="{{ asset('auth/plugins/datatable/datatables.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('auth/plugins/datatable/dataTables.config.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('auth/js/asistencia/index.js') }}"></script>
+<script>
+var csrfToken = '{{ csrf_token() }}';
+</script>
+
 @endsection
+
 <script src="https://kit.fontawesome.com/6f8129a9b1.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="{{ asset('app/css/home/login.css') }}">
+
+@section('content')
 <section class="section_login">
 
     <div class="content_view_login">
         <div class="sect_login">
-            <div class="content_login" style="width:50% !important;">
+            <div class="content_login" style="width:90% !important;">
                 <div class="content_titulo_login">
                     <img src="{{ asset('app/img/logojacblack.png') }}" alt=""><br><br>
-                    <span>BIENVENIDOS</span>
-                    <p class="title_">SOMOS JAC</p>
-                    <p>Deja tu opinión aquí</p>
-                </div><br>
-                <form class="form-login" action="{{ route('home.store') }}" method="post">
-                    @csrf
-                    <div class="form-group">
-                        <label for="opinion" class="text-primary-m">Tu Opinión</label>
-                        <textarea id="opinion" name="opinion"
-                            class="form-control-m {{ $errors->has('opinion') ? ' is-invalid' : '' }}" required
-                            placeholder="Escribe tu opinión aquí">{{ old('opinion') }}</textarea>
-                        @if ($errors->has('opinion'))
-                        <span class="invalid-feedback" role="alert">
-                            <span style="color:#cd3232;">{{ $errors->first('opinion') }}</span>
-                        </span>
-                        @endif
-                    </div>
-                    <br>
-                    <div class="form-group">
-                        <label class="text-primary-m">Calificación</label><br>
-                        <div class="rating">
-                            <input type="radio" id="star5" name="rating" value="5" required />
-                            <label for="star5" title="5 stars">&#9733;</label>
-                            <input type="radio" id="star4" name="rating" value="4" />
-                            <label for="star4" title="4 stars">&#9733;</label>
-                            <input type="radio" id="star3" name="rating" value="3" />
-                            <label for="star3" title="3 stars">&#9733;</label>
-                            <input type="radio" id="star2" name="rating" value="2" />
-                            <label for="star2" title="2 stars">&#9733;</label>
-                            <input type="radio" id="star1" name="rating" value="1" />
-                            <label for="star1" title="1 star">&#9733;</label>
+                </div>
+                <div class="row align-items-center">
+                    <!-- Contenedor para los mensajes -->
+                    <div class="col-lg-12">
+                        <!-- Mensaje de éxito -->
+                        @if (session('success'))
+                        <div class="alert alert-success d-flex align-items-center" role="alert">
+                            <i class="fa fa-check-circle me-2"></i> <!-- Icono de éxito -->
+                            <div>
+                                <ul class="mb-0">
+                                    {{ session('success') }}
+                                </ul>
+                            </div>
                         </div>
-                        @if ($errors->has('rating'))
-                        <span class="invalid-feedback" role="alert">
-                            <span style="color:#cd3232;">{{ $errors->first('rating') }}</span>
-                        </span>
+                        @endif
+                        <!-- Mensaje de error -->
+                        @if ($errors->any())
+                        <div class="alert alert-danger d-flex align-items-center" role="alert">
+                            <i class="fa fa-exclamation-triangle me-2"></i> <!-- Icono de error -->
+                            <div>
+                                <ul class="mb-0">
+                                    @foreach ($errors->all() as $error)
+                                    {{ $error }}
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
                         @endif
                     </div>
-                    <br>
-                    <button type="submit" class="btn-m btn-primary-gradient">Enviar Opinión</button>
-                    <br><br>
-                    {{-- Mensajes de éxito y error --}}
-                    @if (session('success'))
-                    <div class="alert alert-success">
-                        <i class="fas fa-check-circle"></i> {{ session('success') }}
-                    </div>
-                    @endif
-                    @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    @endif
-                </form>
+                </div>
+                <div class="form-row">
+                    <form class="col-lg-12 col-md-12" action="{{ route('auth.asistencia.store') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="id_user" class="id_user" value="1" required>
+                        <div style="display: flex; flex-wrap: wrap;">
+                            <!-- Programa -->
+                            <div class="form-group col-lg-12">
+                                <label for="tipoprograma" class="m-0 label-primary" style="font-size: 17px;">
+                                    <i class="fa fa-briefcase"></i> Programa
+                                </label>
+                                <select class="form-control form-control-lg" id="programa_id" name="programa_id"
+                                    required>
+                                    <option value="" disabled selected>Seleccione Programa..</option>
+                                    @foreach ($tipoprograma as $tipoprograma)
+                                    <option value="{{ $tipoprograma->id }}">{{ $tipoprograma->nombre }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <!-- Fecha -->
+                            <div class="form-group col-lg-12">
+                                <label for="fecha" class="m-0 label-primary" style="font-size: 17px;">
+                                    <i class="fa fa-calendar-alt"></i> Fecha
+                                </label>
+                                <input type="date" class="form-control form-control-lg" id="fecha_registro"
+                                    name="fecha_registro" required>
+                                <div id="fechaError" class="form-text text-danger"
+                                    style="display: none; font-size: 12px; margin-top: 5px;">
+                                    <i class="fa fa-exclamation-circle"></i> Por favor, debes seleccionar un Sábado.
+                                </div>
+                            </div>
+
+                            <!-- Célula -->
+                            <div class="form-group col-lg-12">
+                                <label for="celula" class="m-0 label-primary" style="font-size: 17px;">
+                                    <i class="fa fa-users"></i> Célula
+                                </label>
+                                <select class="form-control form-control-lg" id="celulas_id" name="celula_id" required>
+                                    <option value="" disabled selected>Seleccione Célula..</option>
+                                    @foreach ($celulas as $celula)
+                                    <option value="{{ $celula->id }}">{{ $celula->nombre }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <style>
+                            .custom-checkbox {
+                                display: flex;
+                                align-items: center;
+                                justify-content: flex-end;
+                                margin-bottom: 10px;
+                                padding: 10px;
+                                border: 1px solid #ccc;
+                                border-radius: 5px;
+                                transition: background-color 0.3s ease, border-color 0.3s ease;
+                            }
+
+                            .custom-checkbox:hover {
+                                background-color: #f0f0f0;
+                            }
+
+                            .form-check-label {
+                                font-size: 16px;
+                                color: #333;
+                                cursor: pointer;
+                                transition: color 0.3s ease;
+                                flex-grow: 1;
+                                margin-right: 20px;
+                            }
+
+                            .form-check-input {
+                                width: 20px;
+                                height: 20px;
+                                cursor: pointer;
+                            }
+
+                            /* Estilo para el checkbox seleccionado */
+                            .custom-checkbox.selected {
+                                background-color: #007bff;
+                                color: white;
+                                border-color: #0056b3;
+                            }
+                            </style>
+
+                            <!-- Asistentes - Opción 2-->
+                            <div class="form-group col-lg-12">
+                                <label class="m-0 label-primary"
+                                    style="font-size: 17px; font-weight: bold; color: #007bff;">
+                                    <i class="fa fa-user"></i> Asistentes
+                                </label>
+                                <div id="asistentes-container"
+                                    style="padding: 12px; border: 2px solid #007bff; border-radius: 8px; background-color: #f8f9fa; margin-top: 10px;">
+                                    <p style="font-size: 15px; color: #343a40; text-align: center;">
+                                        No hay asistentes disponibles. Seleccione una célula primero.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Asistió? -->
+                            <div class="form-group col-lg-12">
+                                <label for="asistio" class="m-0 label-primary" style="font-size: 17px;">
+                                    <i class="fa fa-check-circle"></i> Estado
+                                </label>
+                                <select class="form-control form-control-lg" id="estado" name="estado" required>
+                                    <option value="" disabled selected>Seleccione..</option>
+                                    <option value="presente">PRESENTE</option>
+                                    <option value="ausente">AUSENTE</option>
+                                    <option value="justificado">JUSTIFICADO</option>
+                                </select>
+                            </div>
+
+                            <!-- Motivo de Justificación -->
+                            <div class="form-group col-lg-12 d-none" id="motivo-container">
+                                <label for="descripcion" class="m-0 label-primary" style="font-size: 17px;">
+                                    <i class="fa fa-sticky-note"></i> Motivo de Justificación
+                                </label>
+                                <input autocomplete="off" type="text" class="form-control form-control-lg" id="motivo"
+                                    name="motivo" placeholder="Ingrese Descripción">
+                            </div>
+                        </div>
+                        <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const asistioSelect = document.getElementById('estado');
+                            const motivoContainer = document.getElementById('motivo-container');
+
+                            asistioSelect.addEventListener('change', function() {
+                                if (asistioSelect.value === 'justificado') {
+                                    motivoContainer.classList.remove('d-none');
+                                } else {
+                                   motivoContainer.classList.add('d-none');
+                                }
+                            });
+
+                            const fechaInput = document.getElementById('fecha_registro');
+                            const fechaError = document.getElementById('fechaError');
+
+                            fechaInput.addEventListener('change', function() {
+                                const fecha = new Date(fechaInput.value);
+                                const dayOfWeek = fecha
+                            .getDay(); // 0 = Domingo, 1 = Lunes, ..., 6 = Sábado
+
+                                if (dayOfWeek !== 5) { // Verifica si no es sábado
+                                    fechaError.style.display = 'block';
+                                    fechaInput.value = ''; // Limpiar el campo de fecha
+                                } else {
+                                    fechaError.style.display = 'none';
+                                }
+                            });
+
+                        });
+                        </script>
+                        <div class="form-group col-lg-12">
+                            <button type="submit" class="btn btn-primary btn-lg"
+                                style="font-size: 17px;border-radius:15px;">
+                                <i class="fa fa-save"></i> Registrar Asistencia</button>
+                        </div>
+
+                    </form>
+                </div>
+
 
             </div>
         </div>
     </div>
 </section>
-<style>
-.rating {
-    direction: rtl;
-    display: inline-block;
-}
-
-.rating input {
-    display: none;
-}
-
-.rating label {
-    font-size: 30px;
-    color: #b9b9b9;
-    cursor: pointer;
-}
-
-.rating input:checked~label {
-    color: #f7c04d;
-    /* Color for selected stars */
-}
-
-.rating label:hover,
-.rating label:hover~label {
-    color: #f7c04d;
-    /* Hover color */
-}
-</style>
+@endsection

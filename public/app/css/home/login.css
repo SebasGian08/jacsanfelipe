@@ -88,11 +88,11 @@ label {
 }
 
 .content_login {
-    background: #24303c;
-    border-radius: 50px;
-    box-shadow: -1px 2px 3px 0px rgba(122, 122, 122, 0.415);
+    background: #ffffff;
+    /* border-radius: 50px; */
+   /*  box-shadow: -10px 15px 4px 3px #0072bf; */
     width: 90%;
-    padding: 8%;
+    padding: 2%;
 }
 
 .content_crear_alumno {
@@ -139,7 +139,9 @@ label {
 }
 
 .content_titulo_login img {
-    width: 100px;
+    width: 40%;
+    max-width: 300px; /* o el valor máximo que desees */
+    height: auto;
 }
 
 .content_titulo_login span {

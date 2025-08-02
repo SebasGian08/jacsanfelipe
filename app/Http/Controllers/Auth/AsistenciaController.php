@@ -207,7 +207,8 @@ class AsistenciaController extends Controller
             }
 
             // Redireccionar a la ruta del programa con un mensaje de éxito
-            return redirect()->route('auth.asistencia')->with('success', 'Registros creados exitosamente.');
+           return redirect()->back()->with('success', 'Registros creados exitosamente.');
+
         }
     
 

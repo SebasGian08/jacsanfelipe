@@ -108,6 +108,64 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function () {
+    $("#celulas_id").change(function () {
+        const celulaId = $(this).val();
+
+        const $asistentesContainer = $("#asistentes-container");
+        $asistentesContainer.empty(); // Limpia el contenedor
+
+        if (celulaId) {
+            $.ajax({
+                type: "POST",
+                url: "/asistentesPorCelula",
+                data: {
+                    id: celulaId,
+                    _token: csrfToken,
+                },
+                dataType: "json",
+                success: function (response) {
+                    if (response.length > 0) {
+                        response.forEach((asistente) => {
+                            const nombreCompleto = `${asistente.nombre} ${asistente.apellido}`;
+                            const checkboxHtml = `
+                            <div class="form-check custom-checkbox">
+                            <label class="form-check-label" 
+                                   for="asistente_${asistente.id}" 
+                                   id="label_asistente_${asistente.id}">
+                                ${nombreCompleto}
+                            </label>
+                            <input class="form-check-input" 
+                                   type="checkbox" 
+                                   value="${asistente.id}" 
+                                   id="asistente_${asistente.id}" 
+                                   name="asistente_id[]" 
+                                   aria-labelledby="label_asistente_${asistente.id}">
+                        </div>
+                        
+                            `;
+                            $asistentesContainer.append(checkboxHtml);
+                        });
+                    } else {
+                        $asistentesContainer.append(
+                            "<p>No hay asistentes disponibles para esta célula.</p>"
+                        );
+                    }
+                },
+                error: function () {
+                    $asistentesContainer.append(
+                        "<p>Ocurrió un error al cargar los asistentes. Inténtalo de nuevo.</p>"
+                    );
+                },
+            });
+        } else {
+            $asistentesContainer.append(
+                "<p>No hay asistentes disponibles. Seleccione una célula primero.</p>"
+            );
+        }
+    });
+});
+
 function clickExcel() {
     $(".dt-buttons .buttons-excel").click();
 }
