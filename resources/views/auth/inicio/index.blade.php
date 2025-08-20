@@ -554,7 +554,7 @@ Highcharts.chart('bautizados', {
     },
     tooltip: {
         formatter: function() {
-            return '<b>' + this.point.bautizado + ': ' + this.point.percentage.toFixed(0) + '%</b>';
+            return '<b>' + this.point.name + ': ' + this.point.percentage.toFixed(0) + '%</b>';
         }
     },
     plotOptions: {
@@ -563,15 +563,16 @@ Highcharts.chart('bautizados', {
             cursor: 'pointer',
             dataLabels: {
                 enabled: true,
-                format: '{point.bautizado}: {point.y}'
+                format: '{point.name}: {point.y}'
             }
         }
     },
     series: [{
         name: 'Cantidad',
         colorByPoint: true,
-        data: transformData(obtenerBautizados)
+        data: transformData(obtenerBautizados) // <-- asegúrate que transformData devuelva {name: 'SI'|'NO', y: cantidad}
     }]
 });
+
 </script>
 @endsection
