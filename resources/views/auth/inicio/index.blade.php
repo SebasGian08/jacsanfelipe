@@ -545,28 +545,18 @@ Highcharts.chart('otro', {
     }]
 });
 
+
+const datosBautizados = Array.isArray(obtenerBautizados.data) ? obtenerBautizados.data : [];
+
+// Transformamos los datos para Highcharts
 function transformBautizados(data) {
-    let arr = [];
-
-    if (Array.isArray(data)) {
-        // Caso: data = [{bautizado: 'SI', total: 43}, {bautizado: 'NO', total: 69}]
-        arr = data;
-    } else if (typeof data === 'object' && data !== null) {
-        // Caso: data = { SI: 43, NO: 69 }
-        arr = Object.keys(data).map(key => ({
-            bautizado: key,
-            total: data[key]
-        }));
-    }
-
-    // Transformamos al formato que Highcharts espera
-    return arr.map(item => ({
+    return data.map(item => ({
         name: item.bautizado,
         y: parseFloat(item.total)
     }));
 }
 
-
+// Dibujamos el gráfico
 Highcharts.chart('bautizados', {
     chart: { type: 'pie' },
     title: { text: 'Cantidad de bautizados' },
@@ -585,9 +575,10 @@ Highcharts.chart('bautizados', {
     series: [{
         name: 'Cantidad',
         colorByPoint: true,
-        data: transformBautizados(obtenerBautizados.data || obtenerBautizados)
+        data: transformBautizados(datosBautizados) // <-- aquí usamos solo el array
     }]
 });
+
 
 
 </script>
