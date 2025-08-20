@@ -193,7 +193,7 @@ class AsistentesController extends Controller
             'tel' => $request->input('tel'),
             'genero' => $request->input('genero'),
             'celula_id' => $request->input('celula_id'),
-            'bautizado' => $request->input('bautizado'),
+            'bautizado' => $request->input('bautizado', 0), // <--- aquí el cambio
             'foto' => $foto ? 'uploads/fotos/' . $foto : null,
         ];
 
