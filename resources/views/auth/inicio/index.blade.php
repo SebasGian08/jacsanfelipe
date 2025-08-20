@@ -545,6 +545,18 @@ Highcharts.chart('otro', {
     }]
 });
 
+function transformBautizados(data) {
+    let arr = Array.isArray(data) ? data : Object.keys(data).map(key => ({
+        bautizado: key,
+        total: data[key]
+    }));
+
+    return arr.map(item => ({
+        name: item.bautizado, // SI o NO
+        y: parseFloat(item.total)
+    }));
+}
+
 Highcharts.chart('bautizados', {
     chart: {
         type: 'pie'
@@ -570,7 +582,7 @@ Highcharts.chart('bautizados', {
     series: [{
         name: 'Cantidad',
         colorByPoint: true,
-        data: transformData(obtenerBautizados) // <-- asegúrate que transformData devuelva {name: 'SI'|'NO', y: cantidad}
+        data: transformBautizados(obtenerBautizados)
     }]
 });
 
