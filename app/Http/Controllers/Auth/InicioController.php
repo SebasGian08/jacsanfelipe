@@ -34,6 +34,7 @@ class InicioController extends Controller
             $seguimientoPorCelula = $this->getSeguimientoPorCelula($fechaDesde, $fechaHasta);
             $asistenciasPresente = $this->getTotalAsistenciaP($fechaDesde, $fechaHasta);
             $asistenciasAusente = $this->getTotalAsistenciaA($fechaDesde, $fechaHasta);
+            $obtenerBautizados = $this->obtenerBautizados($fechaDesde, $fechaHasta);
             
             // Obtener datos para el gráfico sin promedio
             $asistenciasPorPrograma = $this->getTotalAsistenciasPorPrograma($fechaDesde, $fechaHasta);
@@ -45,7 +46,7 @@ class InicioController extends Controller
                 ) {
                 return view('auth.inicio.index', compact('totalAsistentes', 
                     'totalCelulas', 'totalActividades', 'TotalDeAsistentesporCelula', 'seguimientoPorCelula',
-                    'asistenciasPresente', 'asistenciasAusente','asistenciasPorPrograma', 
+                    'asistenciasPresente', 'asistenciasAusente','asistenciasPorPrograma', 'obtenerBautizados',
                     'fechaDesde', 'fechaHasta'));
             }
         
@@ -199,6 +200,16 @@ class InicioController extends Controller
         {
             // Llamar al procedimiento almacenado
             $data = DB::select('CALL ObtenerDatosSeguimiento()');
+            // Retornar los datos en formato JSON
+            return response()->json([
+                'data' => $data
+            ]);
+        }
+
+        public function obtenerBautizados($fecha_desde, $fecha_hasta)
+        {
+            // Llamar al procedimiento almacenado
+            $data = DB::select('CALL ObtenerBautizados()');
             // Retornar los datos en formato JSON
             return response()->json([
                 'data' => $data

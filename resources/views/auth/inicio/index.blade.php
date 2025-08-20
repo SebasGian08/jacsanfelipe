@@ -536,5 +536,34 @@ Highcharts.chart('otro', {
         data: transformData(asistenciasPorPrograma)
     }]
 });
+
+Highcharts.chart('container', {
+    chart: {
+        type: 'pie'
+    },
+    title: {
+        text: 'Cantidad de bautizados'
+    },
+    tooltip: {
+        formatter: function() {
+            return '<b>' + this.point.bautizado + ': ' + this.point.percentage.toFixed(0) + '%</b>';
+        }
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '{point.bautizado}: {point.y}'
+            }
+        }
+    },
+    series: [{
+        name: 'Cantidad',
+        colorByPoint: true,
+        data: transformData(obtenerBautizados)
+    }]
+});
 </script>
 @endsection
