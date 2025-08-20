@@ -290,13 +290,7 @@
 
         <br>
         <div class="row">
-            <div class="col-lg-6 mb-4">
-                <div class="content-header"
-                    style="box-shadow: 0 2px 25px -5px rgba(0, 0, 0, .16), 0 25px 21px -5px rgba(0, 0, 0, .1) !important;">
-                    <div id="bautizados"></div>
-                </div>
-            </div>
-            <div class="col-lg-6 mb-4">
+            <div class="col-lg-12 mb-4">
                 <div class="content-header"
                     style="box-shadow: 0 2px 25px -5px rgba(0, 0, 0, .16), 0 25px 21px -5px rgba(0, 0, 0, .1) !important;">
                     <div id="grafico"></div>
@@ -346,7 +340,6 @@ var seguimientoPorCelula = @json($seguimientoPorCelula);
 var asistenciasPresente = @json($asistenciasPresente);
 var asistenciasAusente = @json($asistenciasAusente);
 var asistenciasPorPrograma = @json($asistenciasPorPrograma);
-var obtenerBautizados = @json($obtenerBautizados);
 
 // Imprimir datos en la consola para depuración
 console.log('TotalDeAsistentesporCelula:', TotalDeAsistentesporCelula);
@@ -354,7 +347,6 @@ console.log('seguimientoPorCelula:', seguimientoPorCelula);
 console.log('asistenciasPresente:', asistenciasPresente);
 console.log('asistenciasAusente:', asistenciasAusente);
 console.log('asistenciasPorPrograma:', asistenciasPorPrograma);
-console.log('obtenerBautizados:', obtenerBautizados);
 
 // Función para transformar datos a números
 function transformData(data) {
@@ -544,42 +536,5 @@ Highcharts.chart('otro', {
         data: transformData(asistenciasPorPrograma)
     }]
 });
-
-
-const datosBautizados = Array.isArray(obtenerBautizados.data) ? obtenerBautizados.data : [];
-
-// Transformamos los datos para Highcharts
-function transformBautizados(data) {
-    return data.map(item => ({
-        name: item.bautizado,
-        y: parseFloat(item.total)
-    }));
-}
-
-// Dibujamos el gráfico
-Highcharts.chart('bautizados', {
-    chart: { type: 'pie' },
-    title: { text: 'Cantidad de bautizados' },
-    tooltip: {
-        formatter: function() {
-            return '<b>' + this.point.name + ': ' + this.point.percentage.toFixed(0) + '%</b>';
-        }
-    },
-    plotOptions: {
-        pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: { enabled: true, format: '{point.name}: {point.y}' }
-        }
-    },
-    series: [{
-        name: 'Cantidad',
-        colorByPoint: true,
-        data: transformBautizados(datosBautizados) // <-- aquí usamos solo el array
-    }]
-});
-
-
-
 </script>
 @endsection
