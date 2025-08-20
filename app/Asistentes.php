@@ -11,7 +11,7 @@ class Asistentes extends Model
         use SoftDeletes;
 
         protected $fillable = [
-            'id','nombre','descripcion','nombre','apellido','fecha_nac','distrito_id','direccion','tel','genero','celula_id','estado','foto'
+            'id','nombre','descripcion','nombre','apellido','fecha_nac','distrito_id','direccion','tel','genero','celula_id','estado','foto', 'bautizado'
         ];
     
         public $timestamps = false;

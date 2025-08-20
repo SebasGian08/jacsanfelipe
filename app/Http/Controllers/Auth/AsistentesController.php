@@ -55,6 +55,7 @@ class AsistentesController extends Controller
                 'celula_id' => $asistente->celula_id,
                 'celula_nombre' => $asistente->celula ? $asistente->celula->nombre : null,
                 'estado' => $asistente->estado,
+                'bautizado' => $asistente->bautizado,
                 // Agrega otros campos según sea necesario
             ];
         });

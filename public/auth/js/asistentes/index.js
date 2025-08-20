@@ -77,6 +77,14 @@ $(function () {
             { title: "Teléfono", data: "tel", class: "text-center" },
             { title: "Género", data: "genero", class: "text-center" },
             { title: "Celula", data: "celula_nombre", class: "text-center" },
+            { 
+                title: "Bautizado", 
+                data: "bautizado", 
+                class: "text-center",
+                render: function (data) {
+                    return data === 1 || data === '1' ? "SI" : "NO";
+                }
+            },
             {
                 title: "Estado",
                 data: "estado",
