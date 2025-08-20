@@ -140,7 +140,22 @@
                                 @endforeach
                             </select>
                         </div>
-
+                        <!-- Bautizado Field -->
+                            <div class="form-group col-lg-6">
+                                <label for="bautizado" class="m-0 label-primary">
+                                    Bautizado
+                                </label>
+                                <div class="input-group">
+                                    <select class="form-control" name="bautizado" id="bautizado" required>
+                                        <option value="1"
+                                            {{ $Entity && $Entity->bautizado == '1' ? 'selected' : '' }}>Si
+                                        </option>
+                                        <option value="0"
+                                            {{ $Entity && $Entity->bautizado == '0' ? 'selected' : '' }}>No
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
                         <div class="form-group col-lg-6">
                             <label for="banner_anuncio" class="m-0 label-primary" style="font-size: 15px;">
                                 Fotografía <span style="font-size: 12px; color: #008f40;">(opcional)</span>
