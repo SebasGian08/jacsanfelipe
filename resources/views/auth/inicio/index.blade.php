@@ -545,46 +545,36 @@ Highcharts.chart('otro', {
     }]
 });
 
-function transformBautizados(data) {
-    let arr = Array.isArray(data) ? data : Object.keys(data).map(key => ({
-        bautizado: key,
-        total: data[key]
-    }));
-
-    return arr.map(item => ({
-        name: item.bautizado, // SI o NO
+function transformDataBautizados(data) {
+    return data.map(item => ({
+        name: item.bautizado,
         y: parseFloat(item.total)
     }));
 }
 
+
 Highcharts.chart('bautizados', {
-    chart: {
-        type: 'pie'
-    },
-    title: {
-        text: 'Cantidad de bautizados'
-    },
+    chart: { type: 'pie' },
+    title: { text: 'Cantidad de bautizados' },
     tooltip: {
         formatter: function() {
             return '<b>' + this.point.name + ': ' + this.point.percentage.toFixed(0) + '%</b>';
         }
     },
     plotOptions: {
-        pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-                enabled: true,
-                format: '{point.name}: {point.y}'
-            }
+        pie: { 
+            allowPointSelect: true, 
+            cursor: 'pointer', 
+            dataLabels: { enabled: true, format: '{point.name}: {point.y}' } 
         }
     },
     series: [{
         name: 'Cantidad',
         colorByPoint: true,
-        data: transformBautizados(obtenerBautizados)
+        data: transformDataBautizados(obtenerBautizados.data)
     }]
 });
+
 
 </script>
 @endsection
