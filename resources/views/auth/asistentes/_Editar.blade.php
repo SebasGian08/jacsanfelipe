@@ -117,6 +117,22 @@
                                     </select>
                                 </div>
                             </div>
+                            <!-- Bautizado Field -->
+                            <div class="form-group col-lg-6">
+                                <label for="estado" class="m-0 label-primary">
+                                    Bautizado
+                                </label>
+                                <div class="input-group">
+                                    <select class="form-control" name="estado" id="estado" required>
+                                        <option value="1"
+                                            {{ $Entity && $Entity->bautizado == '1' ? 'selected' : '' }}>Si
+                                        </option>
+                                        <option value="0"
+                                            {{ $Entity && $Entity->bautizado == '0' ? 'selected' : '' }}>No
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
                             <!-- Estado Field -->
                             <div class="form-group col-lg-6">
                                 <label for="estado" class="m-0 label-primary">

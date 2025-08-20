@@ -317,6 +317,7 @@ class AsistentesController extends Controller
         $asistente->tel = $request->input('tel');
         $asistente->genero = $request->input('genero');
         $asistente->celula_id = $request->input('celula_id');
+        $asistente->bautizado = $request->input('bautizado');
         $asistente->estado = $request->input('estado');
 
         // Manejar la foto si se sube una nueva
